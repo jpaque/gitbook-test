@@ -10,4 +10,4 @@
   * [Editorial Post](page-types/editorial-post.md)
   * [Landing Page](page-types/landing-page.md)
 * [Scratch area for testing](scratch-area-for-testing.md)
-* [Interface](interface.md)
+* [Interface](interface/README.md)
