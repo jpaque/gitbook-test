@@ -112,6 +112,40 @@ section above should be query but doesn't let you cut and paste
 | 500  | Server is busy                |                                    |
 |      |                               |                                    |
 
+#### Fields
+
+| FieldName  | DataType | Category | Description                                                                                                                                                                                                                                    |
+| ---------- | -------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| devEui     | String   | Default  | 64-bit Extended Unique Identifier of the Device transmitting the message                                                                                                                                                                       |
+| gwEui      | String   | Default  | 64-bit Extended Unique Identifier of the Base Station that received the message. Without Duplicates included this identifies Base Station that first relayed the message, though not necessarily the one preferred for downlink communication. |
+| joinId     | Number   | Default  | Incrementing Integer used to Identify the last join                                                                                                                                                                                            |
+| pdu        | String   | Default  | Protocol Data Unit or Customer Payload data                                                                                                                                                                                                    |
+| port       | Number   | Default  | 0 indicates that the FRMPayload contains MAC commands only and 1..223 are Application specific                                                                                                                                                 |
+| seqno      | Number   | Default  | Incrementing Integer used to Identify an uplink                                                                                                                                                                                                |
+| txtime     | String   | Default  | Time the message was received by the Network Server                                                                                                                                                                                            |
+| channel    | Number   | RF Field | Frequency Channel of the transmission                                                                                                                                                                                                          |
+| datarate   | Number   | RF Field | Integer that maps to a spreading factor, bandwidth and bitrate                                                                                                                                                                                 |
+| freq       | Number   | RF Field | Transmit Frequency in MHz                                                                                                                                                                                                                      |
+| rssi       | Number   | RF Field | Received Signal Strength Indicator reported by receiving Gateway                                                                                                                                                                               |
+| snr        | Number   | RF Field | Average Signal to Noise Ratio reported by receiving gateway                                                                                                                                                                                    |
+| ismBand    | String   | RF Field | The ISMBand (US915,EU868,EU433,CN779,AU915,CN470, etc) reported by the receiving Gateway                                                                                                                                                       |
+| maxPayload | Number   | RF Field | Max Payload size in bytes that can be sent at the current datarate by this Device                                                                                                                                                              |
+| appEui     | String   | Optional | The Application's IEEE EUI-64 identifier.                                                                                                                                                                                                      |
+| ack        | Boolean  | Optional | Flag indicating if the uplink was acknowledging the receipt of a downlink                                                                                                                                                                      |
+| ackDnMsgId | Number   | Optional | When present, indicates that a Device has acknowledged a specific downlink message ID                                                                                                                                                          |
+| devClass   | String   | Optional | LoRaWAN Class designation ("A", "B", "C") of the Device                                                                                                                                                                                        |
+| devType    | String   | Optional | The type of the Device                                                                                                                                                                                                                         |
+| dup\*      | Boolean  | Optional | Flag indicating if the uplink was already forwarded because it was heard by multiple Gateways                                                                                                                                                  |
+| estLat\*   | Number   | Optional | Estimated latitude of the Device in decimal degrees                                                                                                                                                                                            |
+| estLng\*   | Number   | Optional | Estimated longitude of the Device in decimal degrees                                                                                                                                                                                           |
+| cfgLat     | Number   | Optional | Configured latitude of the Device in decimal degrees                                                                                                                                                                                           |
+| cfgLng     | Number   | Optional | Configured longitude of the Device in decimal degrees                                                                                                                                                                                          |
+| tags       | String   | Optional | A comma separated list of tags configured on this Device                                                                                                                                                                                       |
+| metadata   | String   | Optional | The metadata value configured on this Device                                                                                                                                                                                                   |
+| devProfile | String   | Optional | The name of the Profile applied to this Device                                                                                                                                                                                                 |
+| fwVersion  | String   | Optional | The firmware version of this Device                                                                                                                                                                                                            |
+| gwRxTime   | String   | Optional | Time the message was received by the Gateway                                                                                                                                                                                                   |
+
 ### Curl Example
 
 {% code title="Curl Example" overflow="wrap" %}
@@ -119,3 +153,20 @@ section above should be query but doesn't let you cut and paste
 curl -X GET \ 'https://api.senetco.io/rest/integration/usage/summary?eui=<EUI>&year=<YEAR>&month=<MONTH>' -H 'Authorization: <API_KEY_TO_USE>'
 ```
 {% endcode %}
+
+**Example:**
+
+```JSON
+{
+   "ack":true,
+   "ackDnMsgId": 100000,
+   "devClass": "A" ,
+   "devEui":"FFFFFFFFFFFFFFFF",
+   "gwEui":"AAAAAAAAAAAAAAAA",
+   "joinId":216,
+   "pdu":"01000016D7011400060E06",
+   "port":1,
+   "seqno":1,
+   "txtime":"2017-02-09T12:38:38.375Z"
+}
+```
