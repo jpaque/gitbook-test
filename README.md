@@ -1,2 +1,6 @@
-# gitbook-test
-blank repo to test gitbook gitsync feature
+---
+coverY: 0
+---
+
+# API Reference
+
